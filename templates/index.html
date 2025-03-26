@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS 리소스 조회</title>
+    <script>
+        function fetchResources() {
+            document.getElementById("result").innerHTML = "조회 중...";
+            fetch("/scan")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("result").innerHTML = "<pre>" + JSON.stringify(data, null, 4) + "</pre>";
+                })
+                .catch(error => {
+                    document.getElementById("result").innerHTML = "오류 발생: " + error;
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>AWS 리소스 조회</h1>
+    <button onclick="fetchResources()">리소스 조회</button>
+    <div id="result" style="margin-top: 20px; white-space: pre-wrap;"></div>
+</body>
+</html>
